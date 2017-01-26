@@ -17,7 +17,7 @@
         android:id="@+id/textView" />
 
     <TextView
-        android:text="I <3 porn"
+        android:text="I h8 porn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView"
