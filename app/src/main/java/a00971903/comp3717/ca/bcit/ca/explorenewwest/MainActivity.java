@@ -12,9 +12,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        walkPage();
+        walkPage(); // call walkPage
     }
 
+    /* at call: creates an intent for "what do you want to see" section*/
     public void walkPage() {
         startActivity(new Intent(this, WhatDoYouWantToSee.class));
     }
