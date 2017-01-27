@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_walk_config"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="a00971903.comp3717.ca.bcit.ca.explorenewwest.WalkConfig">
+
+    <CheckBox
+        android:text="Parks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="47dp"
+        android:id="@+id/Parks" />
+
+    <CheckBox
+        android:text="Off-Leash Dog Areas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Parks"
+        android:layout_alignLeft="@+id/Parks"
+        android:layout_alignStart="@+id/Parks"
+        android:id="@+id/OffLeash" />
+
+    <CheckBox
+        android:text="Sidewalk Cafe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Art"
+        android:layout_alignLeft="@+id/Art"
+        android:layout_alignStart="@+id/Art"
+        android:id="@+id/Cafe" />
+
+    <CheckBox
+        android:text="Public Art"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Art"
+        android:layout_below="@+id/OffLeash"
+        android:layout_alignLeft="@+id/OffLeash"
+        android:layout_alignStart="@+id/OffLeash" />
+
+    <Button
+        android:text="Next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/OffLeash"
+        android:layout_toEndOf="@+id/OffLeash"
+        android:layout_marginLeft="19dp"
+        android:layout_marginStart="19dp"
+        android:layout_marginBottom="60dp"
+        android:id="@+id/button2"
+        android:onClick="mapPage" />
+
+</RelativeLayout>
