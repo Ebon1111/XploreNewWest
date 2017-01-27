@@ -1,0 +1,6 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <application>
+        <activity android:name="a00971903.comp3717.ca.bcit.ca.explorenewwest.WhatDoYouWantToSee"></activity>
+    </application>
+</manifest>
