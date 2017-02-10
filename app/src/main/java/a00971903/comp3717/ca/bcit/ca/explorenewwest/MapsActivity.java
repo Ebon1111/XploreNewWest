@@ -10,6 +10,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -70,6 +71,10 @@ public class MapsActivity extends AppCompatActivity /*FragmentActivity*/ impleme
         // Add a marker in Sydney and move the camera
         LatLng skytrain = new LatLng(49.2014242, -122.9149144);
         mMap.addMarker(new MarkerOptions().position(skytrain).title("New West Skytrain"));
+
+        // Fountains
+        mMap.addMarker(new MarkerOptions().position(new LatLng(49.201901, -122.914949
+        )).title("Drinking Fountain").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
 
         parks.put("Tipperary Park", park1);
         Set<String> keys = parks.keySet();
