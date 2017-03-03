@@ -9,18 +9,25 @@ public class MainGenerator {
             throws Exception
     {
         final Schema schema;
-        final Entity cafeEntity;
+        final Entity categories;
+        final Entity locations;
         final DaoGenerator generator;
 
         schema = new Schema(1, "a00971903.comp3717.ca.bcit.ca.explorenewwest.database.schema");
 
-        // Cafe Table
-        cafeEntity = schema.addEntity("cafe");
-        cafeEntity.addIdProperty();
-        cafeEntity.addStringProperty("cafeName").notNull();
-        cafeEntity.addStringProperty("cafeAddress").notNull();
-        cafeEntity.addLongProperty("latitude").notNull();
-        cafeEntity.addLongProperty("longitude").notNull();
+        categories = schema.addEntity("Category");
+        categories.addIdProperty();
+        categories.addLongProperty("categoryID").notNull();
+        categories.addStringProperty("name").notNull();
+
+        locations = schema.addEntity("Locations");
+        locations.addIdProperty();
+        locations.addStringProperty("name").notNull();
+        locations.addLongProperty("latitude").notNull();
+        locations.addLongProperty("longitude").notNull();
+        locations.addLongProperty("categoryID").notNull();
+
+
 
         generator = new DaoGenerator();
         generator.generateAll(schema, "./app/src/main/java");
