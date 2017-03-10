@@ -2,12 +2,18 @@ package a00971903.comp3717.ca.bcit.ca.explorenewwest;
 
 import android.app.ActionBar;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.Toast;
+
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 public class WalkConfig extends AppCompatActivity {
 
@@ -17,6 +23,11 @@ public class WalkConfig extends AppCompatActivity {
     public static boolean visitArt = false;
     public static boolean visitSchools = false;
 
+    CheckBox checkParks;
+    CheckBox checkCafe ;
+    CheckBox checkOffDog ;
+    CheckBox checkArt;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,7 +36,34 @@ public class WalkConfig extends AppCompatActivity {
         //ActionBar actionBar = getActionBar();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+         checkParks = (CheckBox)findViewById(R.id.Parks);
+         checkCafe = (CheckBox)findViewById(R.id.Cafe);
+         checkOffDog = (CheckBox)findViewById(R.id.OffLeash);
+         checkArt = (CheckBox)findViewById(R.id.Art);
 
+
+    }
+
+    public void mapPage(final View view){
+
+        StringBuilder args = new StringBuilder(100);
+
+        if(checkParks.isChecked()){
+            args.append("Parks,");
+        }
+        if(checkArt.isChecked()){
+            args.append("Art,");
+        }
+        if(checkCafe.isChecked()){
+            args.append("Cafe,");
+        }
+        if(checkOffDog.isChecked()){
+            args.append("OffLeash,");
+        }
+        args.deleteCharAt(args.length()-1);
+        Intent intent = new Intent(this,MapsActivity.class);
+        intent.putExtra("Arguments",args.toString());
+        startActivity(intent);
     }
 
     @Override
@@ -39,9 +77,12 @@ public class WalkConfig extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
     public boolean onCreateOptionsMenu(Menu menu) {
         return true;
     }
+
+
 
     public void planRoute(final View view){
      //   Intent intent = new Intent(WalkConfig.this,MapsActivity.class);
@@ -63,40 +104,8 @@ public class WalkConfig extends AppCompatActivity {
         Log.d(TAG, "exit onResume");
     }
 
-    @Override
-    protected void onPause()
-    {
-        Log.d(TAG, "enter onPause");
-        super.onPause();
-        Log.d(TAG, "exit onPause");
-    }
 
-    @Override
-    protected void onStop()
-    {
-        Log.d(TAG, "enter onStop");
-        super.onStop();
-        Log.d(TAG, "exit onStop");
-    }
 
-    @Override
-    protected void onDestroy()
-    {
-        Log.d(TAG, "enter onDestroy");
-        super.onDestroy();
-        Log.d(TAG, "exit onDestroy");
-    }
 
-    @Override
-    protected void onRestart()
-    {
-        Log.d(TAG, "enter onRestart");
-        super.onRestart();
-        Log.d(TAG, "exit onRestart");
-    }
-
-    public void mapPage(final View view){
-        startActivity(new Intent(this, MapsActivity.class));
-    }
 
 }
