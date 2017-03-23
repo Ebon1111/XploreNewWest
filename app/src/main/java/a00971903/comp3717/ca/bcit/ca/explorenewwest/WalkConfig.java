@@ -61,7 +61,7 @@ public class WalkConfig extends AppCompatActivity {
             args.append("OffLeash,");
         }
         args.deleteCharAt(args.length()-1);
-        Intent intent = new Intent(this,MapsActivity.class);
+        Intent intent = new Intent(this,CSVMapsActivity.class);
         intent.putExtra("Arguments",args.toString());
         startActivity(intent);
     }

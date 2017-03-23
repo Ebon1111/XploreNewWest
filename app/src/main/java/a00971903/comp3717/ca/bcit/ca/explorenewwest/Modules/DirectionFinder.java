@@ -32,9 +32,9 @@ public class DirectionFinder {
 
     public DirectionFinder(DirectionFinderListener listener, String origin, String destination,String waypoints) {
         this.listener = listener;
-        this.origin = origin.replace("(","").replace(")","").substring(9);
-        this.destination = destination.replace("(","").replace(")","").substring(9);
-        this.waypoints=waypoints.replace("(","").replace(")","").substring(9);
+        this.origin = origin;
+        this.destination = destination;
+        this.waypoints=waypoints;
 
 
     }
@@ -45,13 +45,15 @@ public class DirectionFinder {
     }
 
     private String createUrl() throws UnsupportedEncodingException {
-        String urlOrigin = URLEncoder.encode(origin, "utf-8");
+       /** String urlOrigin = URLEncoder.encode(origin, "utf-8");
         String urlDestination = URLEncoder.encode(destination, "utf-8");
         String urlWaypoints = URLEncoder.encode(waypoints, "utf-8");
 
         System.out.println(waypoints);
         System.out.println(DIRECTION_URL_API + "origin=" + urlOrigin + "&destination=" + urlDestination + "&waypoints=" + urlWaypoints+ "&mode=walking" + "&key=" + GOOGLE_API_KEY);
+**/
 
+        System.out.println(DIRECTION_URL_API + "origin=" + origin + "&destination=" + destination + "&waypoints=" + waypoints + "&key=" + GOOGLE_API_KEY);
         return DIRECTION_URL_API + "origin=" + origin + "&destination=" + destination + "&waypoints=" + waypoints + "&key=" + GOOGLE_API_KEY;
 
     }
