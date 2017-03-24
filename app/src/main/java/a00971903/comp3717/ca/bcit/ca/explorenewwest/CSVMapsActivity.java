@@ -104,14 +104,11 @@ public class CSVMapsActivity extends AppCompatActivity implements OnMapReadyCall
         spots.add(new VisitLocation("Start", mCurrentLocation));
 
 
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return;
-        }
         parks = new ArrayList<>();
         bars = new ArrayList<>();
         cafes = new ArrayList<>();
         art = new ArrayList<>();
-        visitedSpots = new HashSet<>();
+       // visitedSpots = new HashSet<>();
 
         skytrain = new LatLng(49.2014242, -122.9149144);
         String argString = getIntent().getStringExtra("Arguments");
@@ -233,12 +230,17 @@ public class CSVMapsActivity extends AppCompatActivity implements OnMapReadyCall
     public void onLocationChanged(Location location) {
         mCurrentLocation = location;
         //MAD TESTY BWOI
-
+        UserLocation.setCurrentLocation(location);
         spots.set(0,new VisitLocation("Start",location));
-        if(waypoints==null) {
+       /** if(waypoints==null) {
             makeWaypointString();
-        }
-       // sendRequest(spots.get(0).formatLatLng(), spots.get(spots.size() - 1).formatLatLng(), waypoints);
+        }**/
+        float zoomLevel = 16;
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom((new LatLng(location.getLatitude(),location.getLongitude())), zoomLevel));
+
+
+        // sendRequest(spots.get(0).formatLatLng(), spots.get(spots.size() - 1).formatLatLng(), waypoints);
     }
 
 
@@ -321,18 +323,31 @@ public class CSVMapsActivity extends AppCompatActivity implements OnMapReadyCall
                         String line;
                         HashSet<String> restCategories = new HashSet<>();
                         if (restSplit[0].equals("restaurant")) {
+
                             for (int j = 1; j < restSplit.length; j++) {
                                 restCategories.add(restSplit[j]);
                             }
+                            if (restCategories.size()==0){
+                                restCategories.add("casual");
+                                restCategories.add("fast food");
+                                restCategories.add("fine dining");
+                            }
                         }
 
+                        for(String temp:restCategories){
+                            System.out.println(temp);
+                        }
+                        System.out.println(restCategories.size());
                         float minDistance = MAX_VALUE;
                         String minKey = "";
                         Location minLocation = new Location("");
                         while ((line = br.readLine()) != null) {
                             String[] entry = line.split(",");
                             if (restSplit[0].equals("restaurant")) {
+                                System.out.println(entry[3]);
+                                System.out.println(restCategories.contains(entry[3]));
                                 if (!(restCategories.contains(entry[3]))) {
+                                   // System.out.println("not in categories");
                                     continue;
                                 }
                             }
@@ -374,12 +389,6 @@ public class CSVMapsActivity extends AppCompatActivity implements OnMapReadyCall
             }
 
             makeWaypointString();
-
-
-           // System.out.println(spots.get(0).formatLatLng());
-           // System.out.println(spots.get(spots.size()-1).formatLatLng());
-
-
 
             sendRequest(spots.get(0).formatLatLng(),spots.get(spots.size()-1).formatLatLng(),waypoints);
 
